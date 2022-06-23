@@ -3,22 +3,56 @@
 {% load static %}
 
 {% block contenidoPagina %}
-    <h1>Cursos</h1>
-    <table style="border: 0.5rem solid #603601; margin: 1rem;">
-        <thead>
-            <td >nombre</td> <!-- table data -->
-            <td>comision</td>
-            <td>fecha</td>
-            <td>duracion</td>
+<h1>agregar-productos</h1>
 
-        </thead>
-        {% for cursos in cursos %}
-        <tr> <!-- tr = table row -->
-            <td>{{cursos.nombre}}</td>
-            <td>{{cursos.comision}}</td>
-            <td>{{cursos.fecha}}</td>
-            <td>{{cursos.duracion}}</td>
-        </tr>
-        {% endfor %}
-    </table>
+<form class="cuestionario m-0 justify-content-between" action="">
+    <fieldset class="cuestionario__body mt-0 justify-content-between">
+        <legend class="text-center">Comida</legend>
+        <div class="justify-content-between">
+            <label>tipo: <input class="d-flex justify-content-between" type="text" placeholder="Nombre: "></label>
+            <label>tamaño: <input class="d-flex justify-content-between" type="text" placeholder="Apellido: " > </label>
+            <label>nombre: <input class="d-flex justify-content-between" type="text" placeholder="Email:"> </label>
+            <label>peso: <input class="d-flex justify-content-between" type="number"  placeholder="Numero de telefono:"> </label>
+            <label>precio: <input class="d-flex justify-content-between" type="number" placeholder="Numero de telefono:"> </label>      
+        </div>
+        <div class="">
+            <input class="btn" type="reset">
+            <Input class="btn" type="submit">
+        </div>
+    </fieldset>
+</form>
+
+<form class="cuestionario m-0 justify-content-between" action="">
+    <fieldset class="cuestionario__body mt-0 justify-content-between">
+        <legend class="text-center">Pipetas</legend>
+        <div class="justify-content-between">
+            <label>tipo: <input class="d-flex justify-content-between" type="text" placeholder="Nombre: "></label>
+            <label>tamaño: <input class="d-flex justify-content-between" type="text" placeholder="Apellido: " > </label>
+            <label>nombre: <input class="d-flex justify-content-between" type="text" placeholder="Email:"> </label>
+            <label>peso: <input class="d-flex justify-content-between" type="number"  placeholder="Numero de telefono:"> </label>
+            <label>precio: <input class="d-flex justify-content-between" type="number" placeholder="Numero de telefono:"> </label>      
+        </div>
+        <div class="">
+            <input class="btn" type="reset">
+            <Input class="btn" type="submit">
+        </div>
+    </fieldset>
+</form>
+
+<form class="cuestionario m-0 justify-content-between" action="">
+    <fieldset class="cuestionario__body mt-0 justify-content-between">
+        <legend class="text-center">Collares</legend>
+        <div class="justify-content-between">
+            <label>tipo: <input class="d-flex justify-content-between" type="text" placeholder="Nombre: "></label>
+            <label>tamaño: <input class="d-flex justify-content-between" type="text" placeholder="Apellido: " > </label>
+            <label>nombre: <input class="d-flex justify-content-between" type="text" placeholder="Email:"> </label>
+            <label>peso: <input class="d-flex justify-content-between" type="number"  placeholder="Numero de telefono:"> </label>
+            <label>precio: <input class="d-flex justify-content-between" type="number" placeholder="Numero de telefono:"> </label>      
+        </div>
+        <div class="">
+            <input class="btn" type="reset">
+            <Input class="btn" type="submit">
+        </div>
+    </fieldset>
+</form>
 {% endblock %}

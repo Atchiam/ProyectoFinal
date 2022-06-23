@@ -1,3 +1,5 @@
+from pyexpat import model
+from turtle import color
 from django.db import models
 from django.forms import DurationField
 
@@ -15,3 +17,23 @@ class Evento (models.Model):
     descripcion= models.CharField (max_length=300)
     fecha= models.DateField()
     duracion= models.DurationField()
+
+
+class Comida (models.Model):
+    tipo = models.CharField (max_length= 30)
+    tamaño = models.CharField (max_length= 30)
+    nombre = models.CharField (max_length=30)
+    peso = models.IntegerField
+    precio = models.IntegerField
+
+class Pipetas (models.Model):
+    tipo = models.CharField (max_length= 30)
+    tamaño = models.CharField (max_length= 30)
+    nombre = models.CharField (max_length=30)
+    peso = models.IntegerField
+    precio = models.IntegerField
+
+class Collares (models.Model):
+    largo = models.IntegerField
+    color = models.CharField (max_length=30)
+    precio = models.IntegerField
