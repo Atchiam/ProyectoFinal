@@ -6,8 +6,6 @@ from .models import *
 def inicio (request):
     return render (request, "ProyectoFinalApp\main.html", {} )
 
-
-
 def cursos (request):
     cursos = Curso.objects.all()
     ctx={'cursos':cursos}
@@ -17,3 +15,6 @@ def eventos (request):
     eventos = Evento.objects.all()
     ctx1={'eventos':eventos}
     return render (request, "ProyectoFinalApp\eventos.html", ctx1  )
+
+def agregar (request):
+    return render (request, r"ProyectoFinalApp\agregar.html",{})
