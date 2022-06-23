@@ -6,6 +6,8 @@ from .models import *
 def inicio (request):
     return render (request, "ProyectoFinalApp\main.html", {} )
 
+
+
 def cursos (request):
     cursos = Curso.objects.all()
     ctx={'cursos':cursos}

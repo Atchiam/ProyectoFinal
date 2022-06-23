@@ -26,14 +26,16 @@ class Comida (models.Model):
     peso = models.IntegerField
     precio = models.IntegerField
 
-class Pipetas (models.Model):
+class Pipeta (models.Model):
     tipo = models.CharField (max_length= 30)
     tamaño = models.CharField (max_length= 30)
     nombre = models.CharField (max_length=30)
     peso = models.IntegerField
     precio = models.IntegerField
 
-class Collares (models.Model):
+class Collar (models.Model):
     largo = models.IntegerField
     color = models.CharField (max_length=30)
     precio = models.IntegerField
+    class Meta:
+        verbose_name_plural = "Collares"
