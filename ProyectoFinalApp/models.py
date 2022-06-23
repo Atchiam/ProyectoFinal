@@ -1,5 +1,3 @@
-from pyexpat import model
-from turtle import color
 from django.db import models
 from django.forms import DurationField
 

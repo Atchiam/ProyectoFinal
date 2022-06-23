@@ -12,5 +12,17 @@ class EventoAdmin (admin.ModelAdmin):
     list_display = ('nombre', 'descripcion','fecha','duracion')
     #search_fields = ('nombre', 'descripcion','fecha','duracion')
 
+class ComidaAdmin (admin.ModelAdmin):
+    list_display = ("tipo","tamaño","nombre","peso","precio")
+
+class PipetaAdmin (admin.ModelAdmin):
+    list_display = ("tipo","nombre","peso","precio")
+
+class CollarAdmin (admin.ModelAdmin):
+    list_display = ("largo", "color", "precio")
+
 admin.site.register( Curso, CursoAdmin)
 admin.site.register( Evento, EventoAdmin)
+admin.site.register( Comida, ComidaAdmin)
+admin.site.register( Pipeta, PipetaAdmin)
+admin.site.register( Collar, CollarAdmin)

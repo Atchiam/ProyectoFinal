@@ -19,4 +19,57 @@ def eventos (request):
 def agregar (request):
     
     
-    return render (request, r"ProyectoFinalApp\agregar.html",{})
+#get
+    if request.method =="GET":
+        return render (request, r"ProyectoFinalApp\agregar.html",{})
+#post
+    elif request.method == "POST":
+        
+        print(request)
+        # info_formulario = request.POST
+        
+        # curso = Curso(info_formulario["nombre"], info_formulario["comision"])
+        # curso.save()
+        return render (request, "ProyectoFinalApp\main.html", {} )
+
+def agregar_pipeta (request):
+#post
+    if request.method == "POST":
+        
+        print(request)
+        # info_formulario = request.POST
+        
+        # curso = Curso(info_formulario["nombre"], info_formulario["comision"])
+        # curso.save()
+        return render (request, r"ProyectoFinalApp\agregar.html",{})
+    
+    else: #get y otros
+        return render (request, r"ProyectoFinalApp\agregar_pipeta.html",{})
+
+def agregar_collar (request):
+#post
+    if request.method == "POST":
+        
+        print(request)
+        # info_formulario = request.POST
+        
+        # curso = Curso(info_formulario["nombre"], info_formulario["comision"])
+        # curso.save()
+        return render (request, r"ProyectoFinalApp\agregar.html",{})
+    
+    else: #get y otros
+        return render (request, r"ProyectoFinalApp\agregar_collar.html",{})
+
+def agregar_comida (request):
+#post
+    if request.method == "POST":
+        
+        print(request)
+        # info_formulario = request.POST
+        
+        # curso = Curso(info_formulario["nombre"], info_formulario["comision"])
+        # curso.save()
+        return render (request, r"ProyectoFinalApp\agregar.html",{})
+    
+    else: #get y otros
+        return render (request, r"ProyectoFinalApp\agregar_comida.html",{})

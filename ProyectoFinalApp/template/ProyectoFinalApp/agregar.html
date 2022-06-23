@@ -4,7 +4,11 @@
 
 {% block contenidoPagina %}
 <h1>Agregar Productos</h1>
-<div class="container-fluid row">
+<a href="{% url 'agregar_collar' %}">Agregar Collar</a>
+<a href="{% url 'agregar_comida' %}">Agregar Comida</a>
+<a href="{% url 'agregar_pipeta' %}">Agregar Pipeta</a>
+{% endblock %}
+<!-- <div class="container-fluid row">
     <form class="cuestionario m-0 row col-4 " action="" method="post">
         {%csrf_token%}
         <fieldset class="cuestionario__body mt-0 ">
@@ -18,7 +22,7 @@
             </div>
             <div class="">
                 <input class="btn" type="reset">
-                <Input class="btn" type="submit">
+                <input class="btn" type="submit">
             </div>
         </fieldset>
     </form>
@@ -35,7 +39,7 @@
             </div>
             <div class="">
                 <input class="btn" type="reset">
-                <Input class="btn" type="submit">
+                <input class="btn" type="submit">
             </div>
         </fieldset>
     </form>
@@ -51,9 +55,8 @@
             </div>
             <div class="">
                 <input class="btn" type="reset">
-                <Input class="btn" type="submit">
+                <input class="btn" type="submit">
             </div>
         </fieldset>
     </form>
-</div>
-{% endblock %}
+</div> -->
