@@ -17,4 +17,6 @@ def eventos (request):
     return render (request, "ProyectoFinalApp\eventos.html", ctx1  )
 
 def agregar (request):
+    
+    
     return render (request, r"ProyectoFinalApp\agregar.html",{})

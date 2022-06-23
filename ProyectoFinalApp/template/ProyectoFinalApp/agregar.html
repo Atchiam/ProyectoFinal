@@ -10,11 +10,11 @@
         <fieldset class="cuestionario__body mt-0 ">
             <legend class="">Comida</legend>
             <div class="">
-                <label>tipo: <input class="d-flex " type="text" placeholder="Gato o Perro " maxlength="30"></label>
-                <label>tamaño: <input class="d-flex " type="text" placeholder="Grande Mediano Pequeño " maxlength="30" > </label>
-                <label>nombre: <input class="d-flex " type="text" placeholder="Marca" maxlength="30"> </label>
-                <label>peso: <input class="d-flex " type="number"  placeholder="Kg"> </label>
-                <label>precio: <input class="d-flex " type="number" placeholder="Precio"> </label>      
+                <label>tipo: <input class="d-flex " type="text" name="tipo" placeholder="Gato o Perro " maxlength="30"></label>
+                <label>tamaño: <input class="d-flex " type="text" name="tamaño" placeholder="Grande Mediano Pequeño " maxlength="30" > </label>
+                <label>nombre: <input class="d-flex " type="text" name="nombre" placeholder="Marca" maxlength="30"> </label>
+                <label>peso: <input class="d-flex " type="number" name="peso" placeholder="Kg" min="0"> </label>
+                <label>precio: <input class="d-flex " type="number" name="precio" placeholder="Precio" min="0"> </label>      
             </div>
             <div class="">
                 <input class="btn" type="reset">
@@ -28,10 +28,10 @@
         <fieldset class="cuestionario__body mt-0  ">
             <legend class="">Pipetas</legend>
             <div class="">
-                <label>tipo: <input class="d-flex " type="text" placeholder="Gato o Perro " maxlength="30"></label>
-                <label>nombre: <input class="d-flex " type="text" placeholder="Marca" maxlength="30"> </label>
-                <label>peso: <input class="d-flex " type="number"  placeholder="Kg"> </label>
-                <label>precio: <input class="d-flex " type="number" placeholder="Precio"> </label>      
+                <label>tipo: <input class="d-flex " type="text" name="tipo" placeholder="Gato o Perro " maxlength="30"></label>
+                <label>nombre: <input class="d-flex " type="text" name="nombre" placeholder="Marca" maxlength="30"> </label>
+                <label>peso: <input class="d-flex " type="number" name="peso"  placeholder="Kg" min="0"> </label>
+                <label>precio: <input class="d-flex " type="number" name="precio" placeholder="Precio" min="0"> </label>      
             </div>
             <div class="">
                 <input class="btn" type="reset">
@@ -45,9 +45,9 @@
         <fieldset class="cuestionario__body mt-0 ">
             <legend class="">Collares</legend>
             <div class="">
-                <label>largo: <input class="d-flex " type="number"  placeholder="cm"> </label>
-                <label>color: <input class="d-flex " type="text" placeholder="Rojo, Azul, etc" maxlength="30"></label>
-                <label>precio: <input class="d-flex " type="number" placeholder="precio"> </label>      
+                <label>largo: <input class="d-flex " type="number" name="largo"  placeholder="cm" min="0"> </label>
+                <label>color: <input class="d-flex " type="text" name="color" placeholder="Rojo, Azul, etc" maxlength="30"></label>
+                <label>precio: <input class="d-flex " type="number" name="precio" placeholder="precio" min="0"> </label>      
             </div>
             <div class="">
                 <input class="btn" type="reset">
