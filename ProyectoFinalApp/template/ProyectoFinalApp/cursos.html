@@ -1,0 +1,24 @@
+{% extends 'ProyectoFinalApp/nav-aside.html' %}
+
+{% load static %}
+
+{% block contenidoPagina %}
+    <h1>Cursos</h1>
+    <table style="border: 0.5rem solid #603601; margin: 1rem;">
+        <thead>
+            <td >nombre</td> <!-- table data -->
+            <td>comision</td>
+            <td>fecha</td>
+            <td>duracion</td>
+
+        </thead>
+        {% for cursos in cursos %}
+        <tr> <!-- tr = table row -->
+            <td>{{cursos.nombre}}</td>
+            <td>{{cursos.comision}}</td>
+            <td>{{cursos.fecha}}</td>
+            <td>{{cursos.duracion}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
