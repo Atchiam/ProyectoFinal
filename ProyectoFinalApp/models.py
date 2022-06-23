@@ -28,7 +28,6 @@ class Comida (models.Model):
 
 class Pipeta (models.Model):
     tipo = models.CharField (max_length= 30)
-    tamaño = models.CharField (max_length= 30)
     nombre = models.CharField (max_length=30)
     peso = models.IntegerField
     precio = models.IntegerField

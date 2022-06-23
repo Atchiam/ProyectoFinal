@@ -4,55 +4,56 @@
 
 {% block contenidoPagina %}
 <h1>Agregar Productos</h1>
+<div class="container-fluid row">
+    <form class="cuestionario m-0 row col-4 " action="" method="post">
+        {%csrf_token%}
+        <fieldset class="cuestionario__body mt-0 ">
+            <legend class="">Comida</legend>
+            <div class="">
+                <label>tipo: <input class="d-flex " type="text" placeholder="Gato o Perro " maxlength="30"></label>
+                <label>tamaño: <input class="d-flex " type="text" placeholder="Grande Mediano Pequeño " maxlength="30" > </label>
+                <label>nombre: <input class="d-flex " type="text" placeholder="Marca" maxlength="30"> </label>
+                <label>peso: <input class="d-flex " type="number"  placeholder="Kg"> </label>
+                <label>precio: <input class="d-flex " type="number" placeholder="Precio"> </label>      
+            </div>
+            <div class="">
+                <input class="btn" type="reset">
+                <Input class="btn" type="submit">
+            </div>
+        </fieldset>
+    </form>
 
-<form class="cuestionario m-0 justify-content-between" action="">
-    <fieldset class="cuestionario__body mt-0 justify-content-between">
-        <legend class="text-center">Comida</legend>
-        <div class="justify-content-between">
-            <label>tipo: <input class="d-flex justify-content-between" type="text" placeholder="Nombre: "></label>
-            <label>tamaño: <input class="d-flex justify-content-between" type="text" placeholder="Apellido: " > </label>
-            <label>nombre: <input class="d-flex justify-content-between" type="text" placeholder="Email:"> </label>
-            <label>peso: <input class="d-flex justify-content-between" type="number"  placeholder="Numero de telefono:"> </label>
-            <label>precio: <input class="d-flex justify-content-between" type="number" placeholder="Numero de telefono:"> </label>      
-        </div>
-        <div class="">
-            <input class="btn" type="reset">
-            <Input class="btn" type="submit">
-        </div>
-    </fieldset>
-</form>
+    <form class="cuestionario m-0 conteiner row col-4" action="" method="post">
+        {%csrf_token%}
+        <fieldset class="cuestionario__body mt-0  ">
+            <legend class="">Pipetas</legend>
+            <div class="">
+                <label>tipo: <input class="d-flex " type="text" placeholder="Gato o Perro " maxlength="30"></label>
+                <label>nombre: <input class="d-flex " type="text" placeholder="Marca" maxlength="30"> </label>
+                <label>peso: <input class="d-flex " type="number"  placeholder="Kg"> </label>
+                <label>precio: <input class="d-flex " type="number" placeholder="Precio"> </label>      
+            </div>
+            <div class="">
+                <input class="btn" type="reset">
+                <Input class="btn" type="submit">
+            </div>
+        </fieldset>
+    </form>
 
-<form class="cuestionario m-0 justify-content-between" action="">
-    <fieldset class="cuestionario__body mt-0 justify-content-between">
-        <legend class="text-center">Pipetas</legend>
-        <div class="justify-content-between">
-            <label>tipo: <input class="d-flex justify-content-between" type="text" placeholder="Nombre: "></label>
-            <label>tamaño: <input class="d-flex justify-content-between" type="text" placeholder="Apellido: " > </label>
-            <label>nombre: <input class="d-flex justify-content-between" type="text" placeholder="Email:"> </label>
-            <label>peso: <input class="d-flex justify-content-between" type="number"  placeholder="Numero de telefono:"> </label>
-            <label>precio: <input class="d-flex justify-content-between" type="number" placeholder="Numero de telefono:"> </label>      
-        </div>
-        <div class="">
-            <input class="btn" type="reset">
-            <Input class="btn" type="submit">
-        </div>
-    </fieldset>
-</form>
-
-<form class="cuestionario m-0 justify-content-between" action="">
-    <fieldset class="cuestionario__body mt-0 justify-content-between">
-        <legend class="text-center">Collares</legend>
-        <div class="justify-content-between">
-            <label>tipo: <input class="d-flex justify-content-between" type="text" placeholder="Nombre: "></label>
-            <label>tamaño: <input class="d-flex justify-content-between" type="text" placeholder="Apellido: " > </label>
-            <label>nombre: <input class="d-flex justify-content-between" type="text" placeholder="Email:"> </label>
-            <label>peso: <input class="d-flex justify-content-between" type="number"  placeholder="Numero de telefono:"> </label>
-            <label>precio: <input class="d-flex justify-content-between" type="number" placeholder="Numero de telefono:"> </label>      
-        </div>
-        <div class="">
-            <input class="btn" type="reset">
-            <Input class="btn" type="submit">
-        </div>
-    </fieldset>
-</form>
+    <form class="cuestionario m-0 row col-4" action="" method="post">
+        {%csrf_token%}
+        <fieldset class="cuestionario__body mt-0 ">
+            <legend class="">Collares</legend>
+            <div class="">
+                <label>largo: <input class="d-flex " type="number"  placeholder="cm"> </label>
+                <label>color: <input class="d-flex " type="text" placeholder="Rojo, Azul, etc" maxlength="30"></label>
+                <label>precio: <input class="d-flex " type="number" placeholder="precio"> </label>      
+            </div>
+            <div class="">
+                <input class="btn" type="reset">
+                <Input class="btn" type="submit">
+            </div>
+        </fieldset>
+    </form>
+</div>
 {% endblock %}
