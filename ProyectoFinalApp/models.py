@@ -21,18 +21,18 @@ class Comida (models.Model):
     tipo = models.CharField (max_length= 30)
     tamaño = models.CharField (max_length= 30)
     nombre = models.CharField (max_length=30)
-    peso = models.IntegerField()
-    precio = models.IntegerField()
+    peso = models.IntegerField(default="peso")
+    precio = models.IntegerField(default="precio")
 
 class Pipeta (models.Model):
     tipo = models.CharField (max_length= 30)
     nombre = models.CharField (max_length=30)
-    peso = models.IntegerField()
-    precio = models.IntegerField()
+    peso = models.IntegerField(default="peso")
+    precio = models.IntegerField(default="precio")
 
 class Collar (models.Model):
-    largo = models.IntegerField()
-    color = models.CharField (max_length=30)
-    precio = models.IntegerField()
+    largo = models.IntegerField(default="largo")
+    color = models.CharField (max_length=30, default="color")
+    precio = models.IntegerField(default="precio")
     class Meta:
         verbose_name_plural = "Collares"
