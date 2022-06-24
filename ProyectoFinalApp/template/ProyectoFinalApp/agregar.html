@@ -3,10 +3,12 @@
 {% load static %}
 
 {% block contenidoPagina %}
-<h1>Agregar Productos</h1>
-<a href="{% url 'agregar_collar' %}">Agregar Collar</a>
-<a href="{% url 'agregar_comida' %}">Agregar Comida</a>
-<a href="{% url 'agregar_pipeta' %}">Agregar Pipeta</a>
+<h1 class="fs-1 ">Agregar Productos</h1>
+<div class="m-4 mt-1 bg-primary d-flex flex-wrap">
+    <a class="fs-4 m-2 text-decoration-none btn btn-info" href="{% url 'agregar_collar' %}">Agregar Collar</a>
+    <a class="fs-4 m-2 text-decoration-none btn btn-warning" href="{% url 'agregar_comida' %}">Agregar Comida</a>
+    <a class="fs-4 m-2 text-decoration-none btn btn-success" href="{% url 'agregar_pipeta' %}">Agregar Pipeta</a>
+</div>
 {% endblock %}
 <!-- <div class="container-fluid row">
     <form class="cuestionario m-0 row col-4 " action="" method="post">
