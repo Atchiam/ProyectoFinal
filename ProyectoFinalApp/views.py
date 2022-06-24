@@ -38,7 +38,7 @@ def agregar_pipeta (request):
 
         info_formulario = request.POST
         
-        pipeta = Pipeta(info_formulario["tipo"], info_formulario["nombre"],info_formulario["peso"], info_formulario["precio"])
+        pipeta = Pipeta(tipo = info_formulario["tipo"], nombre = info_formulario["nombre"], peso = int(info_formulario["peso"]), precio = int(info_formulario["precio"]))
         pipeta.save()
         return render (request, r"ProyectoFinalApp\agregar.html",{})
     
@@ -51,7 +51,7 @@ def agregar_collar (request):
 
         info_formulario = request.POST
         
-        collar = Collar(info_formulario["largo"], info_formulario["color"],info_formulario["precio"])
+        collar = Collar(largo = int(info_formulario["largo"]), color= info_formulario["color"],precio = int(info_formulario["precio"]))
         collar.save()
         return render (request, r"ProyectoFinalApp\agregar.html",{})
     
@@ -64,7 +64,7 @@ def agregar_comida (request):
 
         info_formulario = request.POST
         
-        comida = Comida(info_formulario["tipo"], info_formulario["tamaño"],info_formulario["nombre"], info_formulario["peso"],info_formulario["precio"])
+        comida = Comida(tipo = info_formulario["tipo"], tamaño = info_formulario["tamaño"],nombre = info_formulario["nombre"],peso = int(info_formulario["peso"]),precio = int(info_formulario["precio"]))
         comida.save()
         return render (request, r"ProyectoFinalApp\agregar.html",{})
     
