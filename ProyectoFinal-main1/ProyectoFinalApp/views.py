@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-
+from django.db.models import Q
 # Create your views here.
 
 def inicio (request):
@@ -72,19 +72,38 @@ def agregar_comida (request):
         return render (request, r"ProyectoFinalApp\agregar_comida.html",{})
 
 
-def buscar_comidas(request):
+def buscar(request):
+    
+    
     if request.method == "POST":
-               
-        comida = request.POST["producto"]
-        
-        comidas = Comida.objects.filter(tipo__icontains=comida, tamaño__icontains=comida, peso__icontains=comida, presio__icontains=comida, nombre__icontains=comida)
-        
-        return render(request,"ProyectoCoderApp/buscar_comidas.html",{"comidas":comidas})
-
+        #nombre = Comida.objects.all()
+        nombre = request.POST["nombre"]
+        comidas = Comida.objects.filter(
+            Q(nombre__icontains = nombre) |
+            Q(tipo__icontains = nombre) |
+            Q(peso__icontains = nombre) 
+            )
+        return render(request, "ProyectoFinalApp/main.html",{"comidas":comidas})
     else: # get y otros
         comidas = [] # Curso.objects.all()
     
-        #return render(request,"ProyectoCoderApp/busqueda_comision.html",{"comisiones":comisiones})
-        return render(request, "ProyectoFinalApp/buscar_comidas.html",{"comidas":comidas})
+        return render(request, "ProyectoFinalApp/main.html",{"comidas":comidas})
+        
+    
+    """
+    busqueda = request.POST.get('buscar')
+    comidas = Comida.objects.all()
+    
+    if busqueda:
+        comidas = Comida.objects.filter(
+            Q(nombre__icontains = busqueda) |
+            Q(tipo__icontains = busqueda) |
+            Q(precio__icontains = busqueda) |
+            Q(peso__icontains = busqueda) |
+            Q(tamaño__icontains = busqueda)
+        ).distinct()
+    
+    return render(request,"ProyectoFinalApp/main.html",{"comidas":  comidas})
+    """
 
 

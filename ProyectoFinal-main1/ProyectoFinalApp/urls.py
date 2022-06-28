@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from django.urls import path
 from .views import *
 
@@ -11,6 +12,6 @@ urlpatterns = [
     path(r"agregar_collar", agregar_collar , name= "agregar_collar"),
     path(r"agregar_comida", agregar_comida , name= "agregar_comida"),
     path(r"agregar_pipeta", agregar_pipeta , name= "agregar_pipeta"),
-    path(r"buscar_comidas", buscar_comidas , name= "buscar_comidas"),
+    path(r"buscar", buscar , name= "buscar"),
     
 ]

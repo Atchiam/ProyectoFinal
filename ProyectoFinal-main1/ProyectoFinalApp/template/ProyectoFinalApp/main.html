@@ -7,21 +7,23 @@
     <h1>Bienvenidos PetsShop</h1>
     <h2>Puede Buscar nuestros productos aca:</h2>
 <p>Buscar Comidas: 
-    <form action="" method="post">
+    <form action="buscar" method="post">
         {% csrf_token %}
     
         <!-- <p>Curso: <input type="text" name="nombre" id=""maxlength="30"></p> -->
-        <input type="text" name="comidas" id="" min="0"> 
+        <input type="text" name="nombre" id="" min="0"> 
     
-        <input type="submit" value="Buscar">
+        <input type="submit" value="Buscar...">
     </form> 
 </p>
-<p>Resultados:</p>
-<ul>
-    {% for resultados in comidas%}
-       <li>{{resultado.tipo}} </li>
-    {% endfor %}
-</ul>
+    <p>Resultado:</p>
+    <ul>
+   
+        {% for resultado in comidas %}
+            <li>Marca: {{resultado.nombre}} Tipo: {{resultado.tipo}} Precio: {{resultado.precio}} Peso: {{resultado.peso}} Tamaño: {{resultado.tamaño}}
+            </li>
+        {% endfor %}
+    </ul>
 
-     
+    
 {% endblock %}
