@@ -3,6 +3,8 @@ from .models import *
 
 from .forms import *
 
+from django.db.models import Q
+
 # Create your views here.
 
 def inicio (request):
@@ -94,3 +96,21 @@ def agregar_comida (request):
         formulariovacio = NuevoComida()
         
         return render (request, r"ProyectoFinalApp\agregar_comida.html",{"form": formulariovacio})
+
+def catalogo(request):
+    
+    if request.method == "POST":
+        #nombre = Comida.objects.all()
+        nombre = request.POST["nombre"]
+        comidas = Comida.objects.filter(  
+            Q(nombre__icontains = nombre) |
+            Q(tipo__icontains = nombre)   |
+            Q(precio__icontains = nombre) |
+            Q(peso__icontains = nombre)   |
+            Q(tamaño__icontains = nombre)
+        )
+        return render(request, "ProyectoFinalApp/catalogo.html",{"comidas":comidas})
+    else: # get y otros
+        comidas = [] # Curso.objects.all()
+    
+        return render(request, "ProyectoFinalApp/catalogo.html",{"comidas":comidas})

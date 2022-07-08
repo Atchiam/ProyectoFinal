@@ -21,6 +21,7 @@ class PipetaAdmin (admin.ModelAdmin):
 class CollarAdmin (admin.ModelAdmin):
     list_display = ("largo", "color", "precio")
 
+
 admin.site.register( Curso, CursoAdmin)
 admin.site.register( Evento, EventoAdmin)
 admin.site.register( Comida, ComidaAdmin)

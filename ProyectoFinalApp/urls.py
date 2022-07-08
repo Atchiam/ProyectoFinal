@@ -11,4 +11,5 @@ urlpatterns = [
     path("agregar_collar", agregar_collar , name= "agregar_collar"),
     path("agregar_comida", agregar_comida , name= "agregar_comida"),
     path("agregar_pipeta", agregar_pipeta , name= "agregar_pipeta"),
+    path("catalogo", catalogo, name="catalogo"),
 ]
