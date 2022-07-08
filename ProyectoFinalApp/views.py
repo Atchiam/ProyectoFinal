@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import *
+
+from .forms import *
 
 # Create your views here.
 
@@ -36,37 +38,59 @@ def agregar_pipeta (request):
 #post
     if request.method == "POST":
 
-        info_formulario = request.POST
+        formulario = NuevoPipeta(request.POST)
         
-        pipeta = Pipeta(tipo = info_formulario["tipo"], nombre = info_formulario["nombre"], peso = int(info_formulario["peso"]), precio = int(info_formulario["precio"]))
-        pipeta.save()
-        return render (request, r"ProyectoFinalApp\agregar.html",{})
+        if formulario.is_valid():
+            
+            info_pipeta = formulario.cleaned_data
+            
+            pipeta = Pipeta(tipo = info_pipeta["tipo"], nombre = info_pipeta["nombre"], peso = int(info_pipeta["peso"]), precio = int(info_pipeta["precio"]))
+            pipeta.save()
+            return redirect ("inicio")
+        
+        else:
+            return redirect ("agregar_pipeta")
     
     else: #get y otros
-        return render (request, r"ProyectoFinalApp\agregar_pipeta.html",{})
+        formulariovacio= NuevoPipeta()
+        
+        return render (request, r"ProyectoFinalApp\agregar_pipeta.html", {"form": formulariovacio})
 
 def agregar_collar (request):
 #post
     if request.method == "POST":
-
-        info_formulario = request.POST
         
-        collar = Collar(largo = int(info_formulario["largo"]), color= info_formulario["color"],precio = int(info_formulario["precio"]))
-        collar.save()
-        return render (request, r"ProyectoFinalApp\agregar.html",{})
+        formulario = NuevoCollar(request.POST)
+        
+        if formulario.is_valid():
+            
+            info_formulario = request.POST
+
+            collar = Collar(largo = int(info_formulario["largo"]), color= info_formulario["color"],precio = int(info_formulario["precio"]))
+            collar.save()
+            return redirect ("inicio")
+        
+        else:
+            return redirect ("agregar_collar")
     
     else: #get y otros
-        return render (request, r"ProyectoFinalApp\agregar_collar.html",{})
+        formulariovacio = NuevoCollar()
+        
+        return render (request, r"ProyectoFinalApp\agregar_collar.html",{"form": formulariovacio})
 
 def agregar_comida (request):
 #post
     if request.method == "POST":
-
-        info_formulario = request.POST
+        formulario = NuevoComida(request.POST)
+        if formulario.is_valid():
         
-        comida = Comida(tipo = info_formulario["tipo"], tamaño = info_formulario["tamaño"],nombre = info_formulario["nombre"],peso = int(info_formulario["peso"]),precio = int(info_formulario["precio"]))
-        comida.save()
-        return render (request, r"ProyectoFinalApp\agregar.html",{})
+            info_formulario = request.POST
+            
+            comida = Comida(tipo = info_formulario["tipo"], tamaño = info_formulario["tamaño"],nombre = info_formulario["nombre"],peso = int(info_formulario["peso"]),precio = int(info_formulario["precio"]))
+            comida.save()
+            return redirect ("inicio")
     
     else: #get y otros
-        return render (request, r"ProyectoFinalApp\agregar_comida.html",{})
+        formulariovacio = NuevoComida()
+        
+        return render (request, r"ProyectoFinalApp\agregar_comida.html",{"form": formulariovacio})
