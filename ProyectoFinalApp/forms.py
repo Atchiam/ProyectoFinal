@@ -25,4 +25,4 @@ class NuevoBlogCard (forms.Form):
     texto = forms.CharField (max_length=1000)
     imagen = forms.CharField (max_length=1000)
     autor = forms.CharField (max_length= 30) 
-    #fecha = forms.DateField() fecha = (info_formulario["fecha"])
+    

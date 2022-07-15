@@ -140,17 +140,16 @@ def blog (request):
     
     if request.method == "POST":
         #nombre = Comida.objects.all()
-        blog = request.POST["blog"]
+        nombre = request.POST["nombre"]
         blogs = BlogCard.objects.filter(  
-            Q(título__icontains = blog)   |
-            Q(subtítulo__icontains = blog)|
-            Q(texto__icontains = blog)    |
-            Q(imagen__icontains = blog)   |
-            Q(autor__icontains = blog)    |
-            Q(fecha__icontains = blog)
+            Q(título__icontains = nombre)   |
+            Q(subtítulo__icontains = nombre)|
+            Q(texto__icontains = nombre)    |
+            Q(imagen__icontains = nombre)   |
+            Q(autor__icontains = nombre)    |
+            Q(fecha__icontains = nombre)
         )
         return render(request, "ProyectoFinalApp/blog.html",{"blogs":blogs})
     else: # get y otros
-        blog = [] # Curso.objects.all()
-    
-        return render(request, "ProyectoFinalApp/blog.html",{"blog":blog})
+        blogs = BlogCard.objects.all()
+        return render(request, "ProyectoFinalApp/blog.html",{"blogs":blogs})
