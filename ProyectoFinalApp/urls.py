@@ -12,4 +12,6 @@ urlpatterns = [
     path("agregar_comida", agregar_comida , name= "agregar_comida"),
     path("agregar_pipeta", agregar_pipeta , name= "agregar_pipeta"),
     path("catalogo", catalogo, name="catalogo"),
+    path("blog", blog, name="blog"),
+    path("nuevo-blog", nuevo_blog, name= "nuevo_blog"),
 ]

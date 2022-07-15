@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import Model
-from django.forms import DurationField
+
 # Create your models here.
 class Curso (models.Model):
     nombre = models.CharField(max_length=30)
@@ -36,3 +36,11 @@ class Collar (models.Model):
     precio = models.IntegerField(default="precio")
     class Meta:
         verbose_name_plural = "Collares"
+
+class BlogCard (models.Model):
+    título = models.CharField (max_length= 30)
+    subtítulo = models.CharField (max_length= 30)
+    texto = models.CharField (max_length=1000)
+    imagen = models.CharField (max_length=1000)
+    autor = models.CharField (max_length= 30) 
+    fecha = models.DateField (auto_now = True)

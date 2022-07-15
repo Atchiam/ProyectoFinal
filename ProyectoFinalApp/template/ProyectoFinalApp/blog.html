@@ -1,0 +1,27 @@
+{% extends 'ProyectoFinalApp/nav-aside.html' %}
+
+{% load static %}
+
+{% block contenidoPagina %}
+
+    <h1>Bienvenidos a blogs-fulanito</h1>
+    <p>Buscar blog: 
+        <form action="blog" method="post">
+            {% csrf_token %}
+        
+            <!-- <p>Curso: <input type="text" name="nombre" id=""maxlength="30"></p> -->
+            <input type="text" name="nombre" id="" min="0"> 
+        
+            <input type="submit" value="Buscar...">
+        </form> 
+    </p>
+
+    <p>Resultado:</p>
+
+    <ul>
+        {% for resultado in blogs %}
+            <li>título: {{resultado.título}} subtítulo: {{resultado.subtítulo}} texto: {{resultado.texto}} imagen: {{resultado.imagen}} autor: {{resultado.autor}} fecha: {{resultado.fecha}}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

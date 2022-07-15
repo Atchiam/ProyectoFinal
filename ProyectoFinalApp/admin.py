@@ -21,9 +21,14 @@ class PipetaAdmin (admin.ModelAdmin):
 class CollarAdmin (admin.ModelAdmin):
     list_display = ("largo", "color", "precio")
 
+class BlogCardAdmin (admin.ModelAdmin):
+    list_display = ("título", "subtítulo", "texto", "imagen","autor","fecha")
+
+
 
 admin.site.register( Curso, CursoAdmin)
 admin.site.register( Evento, EventoAdmin)
 admin.site.register( Comida, ComidaAdmin)
 admin.site.register( Pipeta, PipetaAdmin)
 admin.site.register( Collar, CollarAdmin)
+admin.site.register( BlogCard, BlogCardAdmin)

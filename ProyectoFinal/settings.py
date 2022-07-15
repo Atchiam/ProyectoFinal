@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # apps propias
     'ProyectoFinalApp',
+    'UserApp',
 ]
 
 MIDDLEWARE = [

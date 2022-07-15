@@ -114,3 +114,43 @@ def catalogo(request):
         comidas = [] # Curso.objects.all()
     
         return render(request, "ProyectoFinalApp/catalogo.html",{"comidas":comidas})
+
+
+def nuevo_blog(request):
+    if request.method == "POST":
+        formulario = NuevoBlogCard(request.POST)
+        if formulario.is_valid():
+        
+            info_formulario = request.POST
+            
+            nuevoblog = BlogCard(título = info_formulario["título"], subtítulo = info_formulario["subtítulo"],texto = info_formulario["texto"],imagen = (info_formulario["imagen"]),autor = (info_formulario["autor"]))
+            nuevoblog.save()
+            
+            return redirect ("inicio")
+        
+        else:
+            return redirect ("catalogo")
+    
+    else: #get y otros
+        formulariovacio = NuevoBlogCard()
+        
+        return render (request, r"ProyectoFinalApp\nuevo_blog.html",{"form": formulariovacio})
+
+def blog (request):
+    
+    if request.method == "POST":
+        #nombre = Comida.objects.all()
+        blog = request.POST["blog"]
+        blogs = BlogCard.objects.filter(  
+            Q(título__icontains = blog)   |
+            Q(subtítulo__icontains = blog)|
+            Q(texto__icontains = blog)    |
+            Q(imagen__icontains = blog)   |
+            Q(autor__icontains = blog)    |
+            Q(fecha__icontains = blog)
+        )
+        return render(request, "ProyectoFinalApp/blog.html",{"blogs":blogs})
+    else: # get y otros
+        blog = [] # Curso.objects.all()
+    
+        return render(request, "ProyectoFinalApp/blog.html",{"blog":blog})
