@@ -14,4 +14,8 @@ urlpatterns = [
     path("catalogo", catalogo, name="catalogo"),
     path("blog", blog, name="blog"),
     path("nuevo-blog", nuevo_blog, name= "nuevo_blog"),
+    path("ver-blog/<blog_id>", ver_blog, name= "ver_blog"),
+    path("editar-blog/<blog_id>", editar_blog, name= "editar_blog"),
+    path("borrar-blog/<blog_id>", borrar_blog, name= "borrar_blog"),
+    
 ]

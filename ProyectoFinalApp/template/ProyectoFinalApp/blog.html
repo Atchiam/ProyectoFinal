@@ -14,6 +14,7 @@
         
             <input type="submit" value="Buscar...">
         </form> 
+        <a class="btn btn-primary" href="{% url 'nuevo_blog' %}">Sumar un blog</a>
     </p>
 
     <p>Resultado:</p>
@@ -33,6 +34,9 @@
                     <div class="card-footer d-flex flex-wrap justify-content-evenly ">
                         <a href="#" class="card-link">{{resultado.autor}}</a>
                         <small class="text-muted">{{resultado.fecha}}</small>
+                        <a href="{% url 'editar_blog' resultado.id %}" class="text-primary badge badge-primary text-decoration-none"> <i class="bi bi-pencil-square"></i> Editar</a>
+                        <a href="{% url 'borrar_blog' resultado.id %}" class="text-danger badge badge-danger text-decoration-none"> <i class="bi bi-x-square"></i> Eliminar</a>
+                        <a href="{% url 'ver_blog' resultado.id %}" class="text-primary badge badge-primary text-decoration-none"> <i class="bi bi-pencil-square"></i> ver</a>
                     </div>
                 </div>
             </div>
