@@ -5,7 +5,8 @@
 {% block contenidoPagina %}
 <div class="bg-success bg-opacity-25">
     <h1>Bienvenidos a blogs-fulanito</h1>
-    <p>Buscar blog: 
+    <div class="m-4">
+        <p class="mb-2"> Buscar blog: </p>
         <form action="blog" method="post">
             {% csrf_token %}
         
@@ -14,10 +15,10 @@
         
             <input type="submit" value="Buscar...">
         </form> 
-        <a class="btn btn-primary" href="{% url 'nuevo_blog' %}">Sumar un blog</a>
-    </p>
+        <a class="btn btn-primary mt-2" href="{% url 'nuevo_blog' %}">Sumar un blog</a>
+    </div>
 
-    <p>Resultado:</p>
+    <p class="m-4">Resultado:</p>
 
     <div class="d-flex flex-wrap card-deck justify-content-evenly ">
         {% for resultado in blogs %}
