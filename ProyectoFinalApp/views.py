@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import redirect, render
 from .models import *
 
@@ -9,6 +10,9 @@ from django.db.models import Q
 
 def inicio (request):
     return render (request, "ProyectoFinalApp\main.html", {} )
+
+def about (request):
+    return render (request, r"ProyectoFinalApp\about.html", {} )
 
 def cursos (request):
     cursos = Curso.objects.all()
@@ -115,6 +119,24 @@ def catalogo(request):
     
         return render(request, "ProyectoFinalApp/catalogo.html",{"comidas":comidas})
 
+def blog (request):
+    
+    if request.method == "POST":
+        #nombre = Comida.objects.all()
+        nombre = request.POST["nombre"]
+        blogs = BlogCard.objects.filter(  
+            Q(título__icontains = nombre)   |
+            Q(subtítulo__icontains = nombre)|
+            Q(texto__icontains = nombre)    |
+            Q(imagen__icontains = nombre)   |
+            Q(autor__icontains = nombre)    |
+            Q(fecha__icontains = nombre)
+        )
+        return render(request, "ProyectoFinalApp/blog.html",{"blogs":blogs})
+    else: # get y otros
+        blogs = BlogCard.objects.all()
+        return render(request, "ProyectoFinalApp/blog.html",{"blogs":blogs})
+
 
 def nuevo_blog(request):
     if request.method == "POST":
@@ -136,21 +158,52 @@ def nuevo_blog(request):
         
         return render (request, r"ProyectoFinalApp\nuevo_blog.html",{"form": formulariovacio})
 
-def blog (request):
+
+def ver_blog (request, blog_id):
     
-    if request.method == "POST":
-        #nombre = Comida.objects.all()
-        blog = request.POST["blog"]
-        blogs = BlogCard.objects.filter(  
-            Q(título__icontains = blog)   |
-            Q(subtítulo__icontains = blog)|
-            Q(texto__icontains = blog)    |
-            Q(imagen__icontains = blog)   |
-            Q(autor__icontains = blog)    |
-            Q(fecha__icontains = blog)
-        )
-        return render(request, "ProyectoFinalApp/blog.html",{"blogs":blogs})
-    else: # get y otros
-        blog = [] # Curso.objects.all()
+    blog = BlogCard.objects.get(id=blog_id)
     
-        return render(request, "ProyectoFinalApp/blog.html",{"blog":blog})
+    return render (request, r"ProyectoFinalApp\ver_blog.html", {"blog" : blog}  )
+
+
+
+def borrar_blog (request, blog_id):
+    
+    blog = BlogCard.objects.get(id=blog_id)
+    
+    blog.delete()
+    
+    return redirect ("blog")
+
+
+
+def editar_blog(request , blog_id):
+    
+    blog = BlogCard.objects.get(id = blog_id)
+    #Si es metodo POST hago lo mismo que el agregar
+    if request.method =='POST':
+        
+        formulario = NuevoBlogCard(request.POST)
+        
+        if formulario.is_valid():
+        
+            info_formulario = formulario.cleaned_data
+            
+            blog.título= info_formulario["título"]
+            blog.subtítulo = info_formulario["subtítulo"]
+            blog.texto = info_formulario["texto"]
+            blog.imagen = info_formulario["imagen"]
+            blog.autor = info_formulario["autor"]
+            
+            blog.save()
+            
+            return redirect ("inicio")
+        
+        else:
+            return redirect ("catalogo")
+        
+    #En caso que no sea post
+    else:
+        miFormulario=NuevoBlogCard(initial={"título": blog.título, "subtítulo": blog.subtítulo, "texto": blog.texto,"imagen": blog.imagen,"autor": blog.autor})
+    #Voy al html que me permite editar
+    return render(request,"ProyectoFinalApp/editar_blog.html",{"form":miFormulario})

@@ -31,7 +31,7 @@ class Pipeta (models.Model):
     precio = models.IntegerField(default="precio")
 
 class Collar (models.Model):
-    largo = models.IntegerField(default="largo")
+    largo = models.IntegerField(default="largo") 
     color = models.CharField (max_length=30, default="color")
     precio = models.IntegerField(default="precio")
     class Meta:
