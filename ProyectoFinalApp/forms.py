@@ -24,5 +24,4 @@ class NuevoBlogCard (forms.Form):
     subtítulo = forms.CharField (max_length= 30)
     texto = forms.CharField (max_length=1000)
     imagen = forms.CharField (max_length=1000)
-    autor = forms.CharField (max_length= 30) 
     
