@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import redirect, render
 from .models import *
 
@@ -9,6 +10,9 @@ from django.db.models import Q
 
 def inicio (request):
     return render (request, "ProyectoFinalApp\main.html", {} )
+
+def about (request):
+    return render (request, r"ProyectoFinalApp\about.html", {} )
 
 def cursos (request):
     cursos = Curso.objects.all()
