@@ -6,6 +6,7 @@ from .views import *
 urlpatterns = [
     path("", inicio, name= "inicio"),
     path("about", about, name= "about"),
+
     path("cursos", cursos, name="cursos"),
     path("eventos",eventos, name= "eventos"),
     path("agregar", agregar, name= "agregar"),
@@ -18,5 +19,4 @@ urlpatterns = [
     path("ver-blog/<blog_id>", ver_blog, name= "ver_blog"),
     path("editar-blog/<blog_id>", editar_blog, name= "editar_blog"),
     path("borrar-blog/<blog_id>", borrar_blog, name= "borrar_blog"),
-    
 ]
