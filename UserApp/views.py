@@ -114,6 +114,7 @@ def login_request(request):
     form = AuthenticationForm()
 
     return render(request,"UserApp/login.html",{"form":form})
+"""
 
 def register_request(request):
 
@@ -143,6 +144,7 @@ def register_request(request):
     form = UserRegisterForm()
 
     return render(request,"UserApp/register.html",{"form":form})
+"""
 
 def logout_request(request):
     logout(request)

@@ -4,13 +4,9 @@ from .views import *
 
 
 urlpatterns = [
-    path("", inicio, name="inicio"),
-    path("leerPersona",leerPersona, name="leerPersona"),
-    
-    
-    
-    path('persona/', persona, name="persona"),
-    path('leerPersona/', leerPersona, name="leerPersona"),
+    path("", inicio, name="inicio"),   
+    path('personas/', personas, name="personas"),
+    path('crearpersona', crearPersona, name="crearpersona"),
     path('eliminarPersona/<persona_id>', eliminarPersona, name="eliminarPersona"),
     path('editarPersona/<persona_id>', editarPersona, name="editarPersona"),
 ]
