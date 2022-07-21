@@ -1,4 +1,4 @@
-import re
+
 from django.shortcuts import redirect, render
 from .models import *
 
@@ -145,7 +145,7 @@ def nuevo_blog(request):
         
             info_formulario = request.POST
             
-            nuevoblog = BlogCard(título = info_formulario["título"], subtítulo = info_formulario["subtítulo"],texto = info_formulario["texto"],imagen = (info_formulario["imagen"]),autor = (info_formulario["autor"]))
+            nuevoblog = BlogCard(título = info_formulario["título"], subtítulo = info_formulario["subtítulo"],texto = info_formulario["texto"],imagen = (info_formulario["imagen"]),autor = ())
             nuevoblog.save()
             
             return redirect ("inicio")

@@ -18,8 +18,6 @@
         <a class="btn btn-primary mt-2" href="{% url 'nuevo_blog' %}">Sumar un blog</a>
     </div>
 
-    <p class="m-4">Resultado:</p>
-
     <div class="d-flex flex-wrap card-deck justify-content-evenly ">
         {% for resultado in blogs %}
             <!-- <li>título: {{resultado.título}} subtítulo: {{resultado.subtítulo}} texto: {{resultado.texto}} imagen: {{resultado.imagen}} autor: {{resultado.autor}} fecha: {{resultado.fecha}}
