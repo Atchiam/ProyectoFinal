@@ -32,11 +32,11 @@ def personas(request):
         if search != "":
             personas = Persona.objects.filter( Q(nombre__icontains=search) | Q(apellido__icontains=search) ).values()
 
-            return render(request,"UserApp/persona.html",{"personas":personas, "search":True, "busqueda":search})
+            return render(request,"UserApp/personas",{"personas":personas, "search":True, "busqueda":search})
 
     personas = Persona.objects.all()
 
-    return render(request,"UserApp/persona.html",{"personas":personas})
+    return render(request,"UserApp/personas",{"personas":personas})
 
 def crearPersona(request):
     
@@ -54,17 +54,17 @@ def crearPersona(request):
 
             return redirect("personas")
 
-        return render(request,"UserApp/formulario_persona.html",{"form":formulario})
+        return render(request,"UserApp/formulario_persona",{"form":formulario})
 
     # get
     formulario = PersonaFormulario()
-    return render(request,"UserApp/formulario_persona.html",{"form":formulario})
+    return render(request,"UserApp/formulario_persona",{"form":formulario})
 
 def eliminarPersona(request,persona_id):
 
     persona = Persona.objects.get(id=persona_id)
     persona.delete()
-    return redirect("persona")
+    return redirect("personas")
 
 def editarPersona(request,persona_id):
 
@@ -89,7 +89,7 @@ def editarPersona(request,persona_id):
     # get
     formulario = PersonaFormulario(initial={"nombre":persona.nombre, "apellido":persona.apellido, "email": persona.email})
     
-    return render(request,"UserApp/formulario_persona.html",{"form":formulario})
+    return render(request,"UserApp/formulario_persona",{"form":formulario})
 
 def login_request(request):
 
@@ -105,7 +105,7 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                return redirect("inicio")
+                return redirect("personas")
             else:
                 return redirect("login")
         else:
@@ -113,39 +113,8 @@ def login_request(request):
     
     form = AuthenticationForm()
 
-    return render(request,"UserApp/login.html",{"form":form})
-"""
-
-def register_request(request):
-
-    if request.method == "POST":
-        
-        # form = UserCreationForm(request.POST)
-        form = UserRegisterForm(request.POST)
-
-        if form.is_valid():
-
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1') # es la primer contraseña, no la confirmacion
-
-            form.save() # registramos el usuario
-            # iniciamos la sesion
-            user = authenticate(username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                return redirect("inicio")
-            else:
-                return redirect("login")
-
-        return render(request,"UserApp/register.html",{"form":form})
-
-    # form = UserCreationForm()
-    form = UserRegisterForm()
-
-    return render(request,"UserApp/register.html",{"form":form})
-"""
+    return render(request,"UserApp/login",{"form":form})
 
 def logout_request(request):
     logout(request)
-    return redirect("inicio")
+    return redirect("personas")
