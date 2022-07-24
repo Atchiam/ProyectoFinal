@@ -115,6 +115,35 @@ def login_request(request):
 
     return render(request,"UserApp/login",{"form":form})
 
+def registrate_request(request):
+
+    if request.method == "POST":
+        
+        # form = UserCreationForm(request.POST)
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1') # es la primer contraseña, no la confirmacion
+
+            form.save() # registramos el usuario
+            # iniciamos la sesion
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect("inicio")
+            else:
+                return redirect("login")
+
+        return render(request,"UserApp/registrate.html",{"form":form})
+
+    # form = UserCreationForm()
+    form = UserCreationForm()
+
+    return render(request,"UserApp/registrate.html",{"form":form})
+
 def logout_request(request):
     logout(request)
     return redirect("personas")
