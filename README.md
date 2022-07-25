@@ -59,6 +59,20 @@ eso nos dirige a la url local del repo, abrimos un navegador y copiamos el link 
 ## Creadores
 
 Este proyecto fue creado por:
+Braian Bartolome Ferreyra
+
+front del proyecto "html, bootstrap, css".
+CRUD (Create, Read, Update, Delete) de blog, readme, pruebas, redirecciones de las paginas. 
+
+
 * https://github.com/Atchiam
+* https://www.linkedin.com/in/braian-ferreyra-1204701ba/
+
+
+Bernardo Centeno Ferrer
+
+En la App de User creamos en models.py el modelo Persona, luego en views.py hicimos el CRUD(persona, crearpersonas, eliminarpersonas, editarpersonas), con sus respectivos urls. Luego si hicieron el login, logaut y registrer y sus urls.
+
 
 * https://github.com/Bernardo-Centeno
+* https://www.linkedin.com/in/bernardo-centeno-ferrer-3ab6181b3/
