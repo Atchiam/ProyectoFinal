@@ -3,8 +3,11 @@
 {% load static %}
 
 {% block contenidoPagina %}
-
+<div class="d-flex flex-column justify-content-center bg-success bg-opacity-25">
     <p class="text-center fs-1">Blogs Cosme Fulanito</p>
-    <h2>aca van las busquedas perringui</h2>
-
+    <img  class="rounded mx-auto d-block" src="https://www.icegif.com/wp-content/uploads/sad-homer-simpson-icegif.gif" alt="">
+    <h2 class="text-center fs-2">seguro que queres eliminar tu post</h2>
+    <a href="{% url 'inicio' %}" class="fs-6 m-2 text-decoration-none btn btn-warning"> <i class="bi bi-pencil-square"></i> Mejor no</a>
+    <a href="{% url 'borrar_blog'%}" class="fs-6 m-2 text-decoration-none btn btn-warning"> <i class="bi bi-x-square"></i> Eliminar</a>
+</div>
 {% endblock %}

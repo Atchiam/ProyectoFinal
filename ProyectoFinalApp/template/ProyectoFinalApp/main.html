@@ -3,8 +3,27 @@
 {% load static %}
 
 {% block contenidoPagina %}
-
-    <p class="text-center fs-1">Blogs Cosme Fulanito</p>
-    <h2>aca van las busquedas perringui</h2>
-
+    <div class="bg-success bg-opacity-25">
+        <p class="text-center fs-1">Blogs Cosme Fulanito</p>
+        <div class="container">
+            <!-- About Section Heading-->
+            <img class="img-fluid img-profile rounded-circle mx-auto mb-2 d-flex flex-column justify-content-center" src="{%static 'assets/img/profile.png' %}" style="height:16rem;" alt="..." />
+            <h2 class="page-section-heading text-center text-uppercase text-white">Te Invitamos a</h2>
+            <!-- About Section Content-->
+            <div class="row">
+                <div class="col-lg-4 ms-auto">
+                    <p class="lead"> que te reguistres si no tenes un usuario.</p> 
+                    <a href="{% url 'registro_user' %}" class="fs-6 m-2 text-decoration-none btn btn-warning"> <i class="bi bi-pencil-square"></i> registrarse</a>
+                </div>
+                <div class="col-lg-4 me-auto">
+                    <p class="lead"> que te loguees para poder aportar contenido.</p>
+                    <a href="{% url 'login' %}" class="fs-6 m-2 text-decoration-none btn btn-warning"> <i class="bi bi-pencil-square"></i> login</a>
+                </div>
+                <div class="col-lg-4 me-auto">
+                    <p class="lead"> o bien podes ver los blogs existentes.</p>
+                    <a href="{% url 'blog' %}" class="fs-6 m-2 text-decoration-none btn btn-warning"> <i class="bi bi-pencil-square"></i> Nuestros Blogs</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
