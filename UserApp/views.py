@@ -1,149 +1,160 @@
-from requests import request
 
-from UserApp.models import Persona
 from django.shortcuts import redirect, render
 from .models import *
 from .forms import *
 
 from django.db.models import Q
 
-from django.views.generic import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-# from django.urls import reverse_lazy
-
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
 
-"""
-def inicio (request):
-    return render (request, "", {} )
-"""
-def personas(request):
 
-    if request.method == "POST":
+def registro_user(request):
 
-        search = request.POST["search"]
-
-        if search != "":
-            personas = Persona.objects.filter( Q(nombre__icontains=search) | Q(apellido__icontains=search) ).values()
-
-            return render(request,"UserApp/personas",{"personas":personas, "search":True, "busqueda":search})
-
-    personas = Persona.objects.all()
-
-    return render(request,"UserApp/personas",{"personas":personas})
-
-def crearPersona(request):
-    
     # post
     if request.method == "POST":
         
-        formulario = PersonaFormulario(request.POST)
+        formulario = UserCreationForm(request.POST)
 
         if formulario.is_valid():
             
-            info = formulario.cleaned_data
-
-            persona = persona(nombre=info["nombre"],apellido=info["apellido"],email=info["email"])
-            persona.save()
-
-            return redirect("personas")
-
-        return render(request,"UserApp/formulario_persona",{"form":formulario})
-
-    # get
-    formulario = PersonaFormulario()
-    return render(request,"UserApp/formulario_persona",{"form":formulario})
-
-def eliminarPersona(request,persona_id):
-
-    persona = Persona.objects.get(id=persona_id)
-    persona.delete()
-    return redirect("personas")
-
-def editarPersona(request,persona_id):
-
-    persona = persona.objects.get(id=persona_id)
-
-    if request.method == "POST":
-
-        formulario = PersonaFormulario(request.POST)
-
-        if formulario.is_valid():
+            username= formulario.cleaned_data['username']
+            formulario.save()
             
-            info_persona = formulario.cleaned_data
-            
-            persona.nombre = info_persona["nombre"]
-            persona.apellido = info_persona["apellido"]
-            persona.email = info_persona["email"]
-            persona.nacimiento = info_persona["nacimiento"]
-            persona.save()
+            return redirect("login")
+        else:
+            return redirect("login")
 
-            return redirect("personas")
+    else:
+        formu = UserCreationForm()
+        return render(request,"ProyectoFinalApp/registro_user.html",{ "form" : formu})
 
-    # get
-    formulario = PersonaFormulario(initial={"nombre":persona.nombre, "apellido":persona.apellido, "email": persona.email})
+
+def login_user(request):
+
     
-    return render(request,"UserApp/formulario_persona",{"form":formulario})
-
-def login_request(request):
-
-    if request.method == "POST":
-
-        form = AuthenticationForm(request, data=request.POST)
-
+    if request.method =="POST":
+        form= AuthenticationForm(request, data=request.POST)
+        
         if form.is_valid():
-
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-
+            usuario = form.cleaned_data.get('username')
+            contra = form.cleaned_data.get('password')
+            
+            user=authenticate(username=usuario,password=contra)
+            
             if user is not None:
-                login(request, user)
-                return redirect("personas")
+                
+                login(request,user)
+                
+                return redirect("blog")
+            
             else:
                 return redirect("login")
         else:
-            return redirect("login")
+            return redirect("registro_user")
     
-    form = AuthenticationForm()
+    else:
+        form = AuthenticationForm()
+        
+        return render (request,r"ProyectoFinalApp/login.html",{"form":form})
 
-    return render(request,"UserApp/login",{"form":form})
 
-def registrate_request(request):
+@login_required
+def editar_user(request):
+    if request.user.is_authenticated:
+        try:
+            avatar = Avatar.objects.get(user_id = request.user.id)
+            url = avatar.imagen.url
+            
+        except:
+            url = "/media/avatar/generica.jpg"
+    else:
+        url = ""
+
+    user = request.user
+    try:
+        avatar = Avatar.objects.get(user = user)
+    except:
+        avatar= Avatar(user = user)
+        avatar.save()
 
     if request.method == "POST":
+
+        formulario = Edit_user(request.POST, request.FILES)
+
+        if formulario.is_valid():
+            
+            info_user = formulario.cleaned_data
+            
+            user.email = info_user["email"]
+            user.first_name = info_user["first_name"]
+            user.last_name = info_user["last_name"]
+            
+            user.save()
+            
+            if info_user["avatar"] != None:
+                avatar.imagen = info_user["avatar"]
+                avatar.save()
+                return redirect("inicio")
+
+            return redirect("inicio")
+
+    else:
+        formulario = Edit_user(initial={"email":user.email, "first_name":user.first_name, "last_name":user.last_name, "avatar":user.avatar })
         
-        # form = UserCreationForm(request.POST)
-        form = UserCreationForm(request.POST)
+    return render(request,"ProyectoFinalApp/editar_user.html",{"form":formulario, "usuario":user, "url": url})
+
+@login_required
+def agregar_avatar(request):
+    
+    if request.user.is_authenticated:
+        try:
+            avatar = Avatar.objects.get(user_id = request.user.id)
+            url = avatar.imagen.url
+            
+        except:
+            url = "/media/avatar/generica.jpg"
+    else:
+        url = ""
+    
+    if request.method == "POST":
+            
+        form = AvatarForm(request.POST, request.FILES)
 
         if form.is_valid():
 
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1') # es la primer contraseña, no la confirmacion
+            u = User.objects.get(username = request.user) # usuario con el que estamos loggueados
+            
+            print (u)
+            
+            avatar = Avatar(user=u, imagen=form.cleaned_data["imagen"])
 
-            form.save() # registramos el usuario
-            # iniciamos la sesion
-            user = authenticate(username=username, password=password)
+            # avatar = Avatar()
+            # avatar.usuario = request.user
+            # avatar.imagen = form.cleaned_data["imagen"]
+            avatar.save()
 
-            if user is not None:
-                login(request, user)
-                return redirect("inicio")
-            else:
-                return redirect("login")
+            return redirect("inicio")
 
-        return render(request,"UserApp/registrate.html",{"form":form})
+    else:
+        form = AvatarForm()
+    
+    return render(request,r"ProyectoFinalApp/agregar_avatar.html",{"form":form, "url": url})
 
-    # form = UserCreationForm()
-    form = UserCreationForm()
+@login_required
+def ver_user (request):
+    
+    if request.user.is_authenticated:
+        usuario= User.objects.get(username = request.user)
+        try:
+            avatar = Avatar.objects.get(user_id = request.user.id)
+            url = avatar.imagen.url
+            
+        except:
+            url = "/media/avatar/generica.jpg"
+    
+    
+    return render(request, r"ProyectoFinalApp\ver_user.html",{"url":url, "user": usuario})
+    
 
-    return render(request,"UserApp/registrate.html",{"form":form})
-
-def logout_request(request):
-    logout(request)
-    return redirect("personas")

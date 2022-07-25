@@ -27,15 +27,12 @@
                     <img class="card-img-top rounded mx-auto d-block" style="height:10rem;" src="{{resultado.imagen}}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{resultado.título}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{resultado.subtítulo}}</h6>
-                        <p class="card-text">{{resultado.texto}}</p>
+                        <p class="card-text">{{resultado.subtítulo}}</p>
                     </div>
-                    <div class="card-footer d-flex flex-wrap justify-content-evenly ">
-                        <a href="#" class="card-link">{{resultado.autor}}</a>
+                    <div class="card-footer d-flex flex-wrap justify-content-evenly">
+                        <small class="text-primary badge badge-primary">{{resultado.autor}}</small>
                         <small class="text-muted">{{resultado.fecha}}</small>
-                        <a href="{% url 'editar_blog' resultado.id %}" class="text-primary badge badge-primary text-decoration-none"> <i class="bi bi-pencil-square"></i> Editar</a>
-                        <a href="{% url 'borrar_blog' resultado.id %}" class="text-danger badge badge-danger text-decoration-none"> <i class="bi bi-x-square"></i> Eliminar</a>
-                        <a href="{% url 'ver_blog' resultado.id %}" class="text-primary badge badge-primary text-decoration-none"> <i class="bi bi-pencil-square"></i> ver</a>
+                        <a href="{% url 'ver_blog' resultado.id %}" class="text-primary badge badge-primary text-decoration-none"> <i class="bi bi-pencil-square"></i> Leer Mas </a>
                     </div>
                 </div>
             </div>

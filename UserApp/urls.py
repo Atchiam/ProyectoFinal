@@ -1,16 +1,16 @@
-from django.contrib import admin
+from re import template
 from django.urls import path
 from .views import *
+from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-    #path("", inicio, name="inicio"),   
-    path('login>', login_request, name="login"),
-    path('register', registrate_request, name="register"),
-    path('logout', logout_request, name="logout"),
     
-    path('personas/', personas, name="personas"),
-        path('crearpersona', crearPersona, name="crearpersona"),
-        path('eliminarPersona/<persona_id>', eliminarPersona, name="eliminarPersona"),
-        path('editarPersona/<persona_id>', editarPersona, name="editarPersona"),
+    path("registro-usuario", registro_user, name= "registro_user"),
+    path("login", login_user, name= "login"),
+    path("logout", LogoutView.as_view (template_name="ProyectoFinalApp/logout.html"), name = "logout" ),
+    path("Editar-user", editar_user, name= "editar_user"),
+    path('agregar-avatar', agregar_avatar, name="agregar_avatar"),
+    path("ver-usuario", ver_user, name= "ver_user" ),
+    
 ]

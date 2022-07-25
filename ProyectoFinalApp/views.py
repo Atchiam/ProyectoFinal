@@ -1,125 +1,55 @@
 
 from django.shortcuts import redirect, render
 from .models import *
+from django.contrib.auth.decorators import login_required
+from UserApp.models import *
 
 from .forms import *
 
 from django.db.models import Q
 
+
 # Create your views here.
 
 def inicio (request):
+    
+    if request.user.is_authenticated:
+        try:
+            avatar = Avatar.objects.get(user_id = request.user.id)
+            url = avatar.imagen.url
+            
+        except:
+            url = "/media/avatar/generica.jpg"
+            
+        return render(request,"ProyectoFinalApp\main.html",{"url":url})
+    
     return render (request, "ProyectoFinalApp\main.html", {} )
 
 def about (request):
+    
+    if request.user.is_authenticated:
+        try:
+            avatar = Avatar.objects.get(user_id = request.user.id)
+            url = avatar.imagen.url
+            
+        except:
+            url = "/media/avatar/generica.jpg"
+            
+        return render(request,r"ProyectoFinalApp\about.html",{"url":url})
+    
     return render (request, r"ProyectoFinalApp\about.html", {} )
 
-def cursos (request):
-    cursos = Curso.objects.all()
-    ctx={'cursos':cursos}
-    return render (request, "ProyectoFinalApp\cursos.html", ctx  )
-
-def eventos (request):
-    eventos = Evento.objects.all()
-    ctx1={'eventos':eventos}
-    return render (request, "ProyectoFinalApp\eventos.html", ctx1  )
-
-def agregar (request):
-    
-    
-#get
-    if request.method =="GET":
-        return render (request, r"ProyectoFinalApp\agregar.html",{})
-#post
-    elif request.method == "POST":
-        
-        print(request)
-        # info_formulario = request.POST
-        
-        # curso = Curso(info_formulario["nombre"], info_formulario["comision"])
-        # curso.save()
-        return render (request, "ProyectoFinalApp\main.html", {} )
-
-def agregar_pipeta (request):
-#post
-    if request.method == "POST":
-
-        formulario = NuevoPipeta(request.POST)
-        
-        if formulario.is_valid():
-            
-            info_pipeta = formulario.cleaned_data
-            
-            pipeta = Pipeta(tipo = info_pipeta["tipo"], nombre = info_pipeta["nombre"], peso = int(info_pipeta["peso"]), precio = int(info_pipeta["precio"]))
-            pipeta.save()
-            return redirect ("inicio")
-        
-        else:
-            return redirect ("agregar_pipeta")
-    
-    else: #get y otros
-        formulariovacio= NuevoPipeta()
-        
-        return render (request, r"ProyectoFinalApp\agregar_pipeta.html", {"form": formulariovacio})
-
-def agregar_collar (request):
-#post
-    if request.method == "POST":
-        
-        formulario = NuevoCollar(request.POST)
-        
-        if formulario.is_valid():
-            
-            info_formulario = request.POST
-
-            collar = Collar(largo = int(info_formulario["largo"]), color= info_formulario["color"],precio = int(info_formulario["precio"]))
-            collar.save()
-            return redirect ("inicio")
-        
-        else:
-            return redirect ("agregar_collar")
-    
-    else: #get y otros
-        formulariovacio = NuevoCollar()
-        
-        return render (request, r"ProyectoFinalApp\agregar_collar.html",{"form": formulariovacio})
-
-def agregar_comida (request):
-#post
-    if request.method == "POST":
-        formulario = NuevoComida(request.POST)
-        if formulario.is_valid():
-        
-            info_formulario = request.POST
-            
-            comida = Comida(tipo = info_formulario["tipo"], tamaño = info_formulario["tamaño"],nombre = info_formulario["nombre"],peso = int(info_formulario["peso"]),precio = int(info_formulario["precio"]))
-            comida.save()
-            return redirect ("inicio")
-    
-    else: #get y otros
-        formulariovacio = NuevoComida()
-        
-        return render (request, r"ProyectoFinalApp\agregar_comida.html",{"form": formulariovacio})
-
-def catalogo(request):
-    
-    if request.method == "POST":
-        #nombre = Comida.objects.all()
-        nombre = request.POST["nombre"]
-        comidas = Comida.objects.filter(  
-            Q(nombre__icontains = nombre) |
-            Q(tipo__icontains = nombre)   |
-            Q(precio__icontains = nombre) |
-            Q(peso__icontains = nombre)   |
-            Q(tamaño__icontains = nombre)
-        )
-        return render(request, "ProyectoFinalApp/catalogo.html",{"comidas":comidas})
-    else: # get y otros
-        comidas = [] # Curso.objects.all()
-    
-        return render(request, "ProyectoFinalApp/catalogo.html",{"comidas":comidas})
-
 def blog (request):
+    
+    if request.user.is_authenticated:
+        try:
+            avatar = Avatar.objects.get(user_id = request.user.id)
+            url = avatar.imagen.url
+            
+        except:
+            url = "/media/avatar/generica.jpg"
+    else:
+        url = ""
     
     if request.method == "POST":
         #nombre = Comida.objects.all()
@@ -132,78 +62,123 @@ def blog (request):
             Q(autor__icontains = nombre)    |
             Q(fecha__icontains = nombre)
         )
-        return render(request, "ProyectoFinalApp/blog.html",{"blogs":blogs})
+        return render(request, "ProyectoFinalApp/blog.html",{"blogs":blogs, "url":url})
     else: # get y otros
         blogs = BlogCard.objects.all()
-        return render(request, "ProyectoFinalApp/blog.html",{"blogs":blogs})
+        return render(request, "ProyectoFinalApp/blog.html",{"blogs":blogs, "url":url})
 
-
+@login_required
 def nuevo_blog(request):
+    if request.user.is_authenticated:
+        try:
+            avatar = Avatar.objects.get(user_id = request.user.id)
+            url = avatar.imagen.url
+            
+        except:
+            url = "/media/avatar/generica.jpg"
+    else:
+        url = ""
+
     if request.method == "POST":
         formulario = NuevoBlogCard(request.POST)
         if formulario.is_valid():
         
             info_formulario = request.POST
-            
-            nuevoblog = BlogCard(título = info_formulario["título"], subtítulo = info_formulario["subtítulo"],texto = info_formulario["texto"],imagen = (info_formulario["imagen"]),autor = ())
+            user_formulario = request.user
+            nuevoblog = BlogCard(
+                        título = info_formulario["título"], 
+                        subtítulo = info_formulario["subtítulo"],
+                        texto = info_formulario["texto"],
+                        imagen = (info_formulario["imagen"]),
+                        autor = user_formulario.username ,
+                        )
             nuevoblog.save()
             
-            return redirect ("inicio")
+            return redirect ("blog")
         
         else:
-            return redirect ("catalogo")
+            return redirect ("blog")
     
     else: #get y otros
         formulariovacio = NuevoBlogCard()
         
-        return render (request, r"ProyectoFinalApp\nuevo_blog.html",{"form": formulariovacio})
+        return render (request, r"ProyectoFinalApp\nuevo_blog.html",{"form": formulariovacio, "url":url})
 
 
 def ver_blog (request, blog_id):
+    if request.user.is_authenticated:
+        try:
+            avatar = Avatar.objects.get(user_id = request.user.id)
+            url = avatar.imagen.url
+            
+        except:
+            url = "/media/avatar/generica.jpg"
+    else:
+        url = ""
     
     blog = BlogCard.objects.get(id=blog_id)
     
-    return render (request, r"ProyectoFinalApp\ver_blog.html", {"blog" : blog}  )
+    return render (request, r"ProyectoFinalApp\ver_blog.html", {"blog" : blog, "url" : url}  )
 
 
-
+@login_required
 def borrar_blog (request, blog_id):
     
-    blog = BlogCard.objects.get(id=blog_id)
+    usercard = str(BlogCard.objects.get(id=blog_id).autor)
     
-    blog.delete()
+    userrequest = str(request.user)
     
-    return redirect ("blog")
-
-
-
-def editar_blog(request , blog_id):
-    
-    blog = BlogCard.objects.get(id = blog_id)
-    #Si es metodo POST hago lo mismo que el agregar
-    if request.method =='POST':
+    if(usercard == userrequest) :
+        blog = BlogCard.objects.get(id=blog_id)
         
-        formulario = NuevoBlogCard(request.POST)
+        blog.delete()
         
-        if formulario.is_valid():
-        
-            info_formulario = formulario.cleaned_data
-            
-            blog.título= info_formulario["título"]
-            blog.subtítulo = info_formulario["subtítulo"]
-            blog.texto = info_formulario["texto"]
-            blog.imagen = info_formulario["imagen"]
-            blog.autor = info_formulario["autor"]
-            
-            blog.save()
-            
-            return redirect ("inicio")
-        
-        else:
-            return redirect ("catalogo")
-        
-    #En caso que no sea post
+        return redirect("blog")
     else:
-        miFormulario=NuevoBlogCard(initial={"título": blog.título, "subtítulo": blog.subtítulo, "texto": blog.texto,"imagen": blog.imagen,"autor": blog.autor})
-    #Voy al html que me permite editar
-    return render(request,"ProyectoFinalApp/editar_blog.html",{"form":miFormulario})
+        return redirect("blog")
+
+
+@login_required
+def editar_blog(request , blog_id):
+    if request.user.is_authenticated:
+        try:
+            avatar = Avatar.objects.get(user_id = request.user.id)
+            url = avatar.imagen.url
+            
+        except:
+            url = "/media/avatar/generica.jpg"
+
+    usercard = str(BlogCard.objects.get(id=blog_id).autor)
+    
+    userrequest = str(request.user)
+    
+    if(usercard == userrequest):
+        blog = BlogCard.objects.get(id = blog_id)
+        #Si es metodo POST hago lo mismo que el agregar
+        if request.method =='POST':
+            
+            formulario = NuevoBlogCard(request.POST)
+            
+            if formulario.is_valid():
+            
+                info_formulario = formulario.cleaned_data
+                
+                blog.título= info_formulario["título"]
+                blog.subtítulo = info_formulario["subtítulo"]
+                blog.texto = info_formulario["texto"]
+                blog.imagen = info_formulario["imagen"]
+                
+                blog.save()
+                
+                return redirect ("blog")
+            
+            else:
+                return redirect ("blog")
+            
+        #En caso que no sea post
+        else:
+            miFormulario=NuevoBlogCard(initial={"título": blog.título, "subtítulo": blog.subtítulo, "texto": blog.texto,"imagen": blog.imagen,"autor": blog.autor})
+        #Voy al html que me permite editar
+        return render(request,"ProyectoFinalApp/editar_blog.html",{"form":miFormulario, "url":url})
+    else:
+        return redirect("blog")
